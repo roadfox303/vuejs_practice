@@ -1,0 +1,41 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="data_input">
+  <span v-for="form in forms" ref="inputs">
+    <label>{{ form.item }}:<input v-bind:name="form.name" v-model="form.input"></input></label>
+  </span>
+  <button v-on:click="create_user">入力内容を追加</button>
+</div>
+
+<div>
+  <ul id="data_list">
+    <li v-for="user in users">
+      {{ user.text }}
+    </li>
+  </ul>
+</div>
+
+<script>
+  var input = new Vue({
+    el: '#data_input',
+    data: {
+      forms: [
+        { item: '名前', name: "name", input: "" },
+        { item: 'コース', name: "course", input: "" },
+        { item: '受講期', name: "period", input: "" }
+      ]
+    },
+    methods: {
+      create_user: function() {
+        list.users.push({ text: "ID : " + (list.users.length + 1) + " / 名前 : " + this.forms[0].input + " / コース : " + this.forms[1].input + " / 受講期 : " + this.forms[2].input })
+      }
+    }
+  })
+  var list = new Vue({
+    el: '#data_list',
+    data:{
+      users: [
+      ]
+    }
+  })
+</script>
